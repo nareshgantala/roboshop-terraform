@@ -1,6 +1,26 @@
+data "aws_ami" "Centos8" {
+  executable_users = ["self"]
+  most_recent      = true
+  owners           = ["973714476881"]
+
+  filter {
+    name   = "name"
+    values = ["Centos-8-DevOps-Practice"]
+  }
+}
+
+variable "instance_type" {
+  default = t3.small
+}
+
+data "aws_security_group" "allow-all" {
+  name = "allow-all"
+}
+
 resource "aws_instance" "frontend" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "frontend"
@@ -16,8 +36,9 @@ resource "aws_route53_record" "frontend" {
 }
 
 resource "aws_instance" "mongodb" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "mongodb"
@@ -33,8 +54,9 @@ resource "aws_route53_record" "mongodb" {
 }
 
 resource "aws_instance" "mysql" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "mysql"
@@ -49,8 +71,9 @@ resource "aws_route53_record" "mysql" {
   records = [aws_instance.mysql.private_ip]
 }
 resource "aws_instance" "payment" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "payment"
@@ -66,8 +89,9 @@ resource "aws_route53_record" "payment" {
 }
 
 resource "aws_instance" "shipping" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "shipping"
@@ -83,8 +107,9 @@ resource "aws_route53_record" "shipping" {
 }
 
 resource "aws_instance" "dispatch" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "dispatch"
@@ -100,8 +125,9 @@ resource "aws_route53_record" "dispatch" {
 }
 
 resource "aws_instance" "cart" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "cart"
@@ -117,8 +143,9 @@ resource "aws_route53_record" "cart" {
 }
 
 resource "aws_instance" "rabbitmq" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "rabbitmq"
@@ -134,8 +161,9 @@ resource "aws_route53_record" "rabbitmq" {
 }
 
 resource "aws_instance" "user" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "user"
@@ -151,8 +179,9 @@ resource "aws_route53_record" "user" {
 }
 
 resource "aws_instance" "catalogue" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "catalogue"
@@ -168,8 +197,9 @@ resource "aws_route53_record" "catalogue" {
 }
 
 resource "aws_instance" "redis" {
-  ami           = "ami-0b4f379183e5706b9"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = data.aws_security_group.allow-all.id
 
   tags = {
     Name = "redis"
