@@ -10,7 +10,7 @@ data "aws_ami" "Centos8" {
 }
 
 variable "instance_type" {
-  default = t3.small
+  default = "t3.small"
 }
 
 data "aws_security_group" "allow-all" {
