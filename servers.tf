@@ -1,5 +1,4 @@
 data "aws_ami" "Centos8" {
-  executable_users = ["self"]
   most_recent      = true
   owners           = ["973714476881"]
 
