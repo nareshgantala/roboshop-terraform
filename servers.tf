@@ -24,6 +24,10 @@ output "indeses" {
   value = length(var.instances)
 }
 
+output "frontend" {
+  value = var.instances[1]
+}
+
 # resource "aws_instance" "frontend" {
 #   count = length(var.instances)
 #   ami           = data.aws_ami.Centos8.image_id
