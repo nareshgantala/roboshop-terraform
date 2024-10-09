@@ -35,7 +35,7 @@ resource "aws_instance" "frontend" {
 resource "aws_route53_record" "Route53" {
   count = length(var.instances)
   zone_id = "Z0795361K3CL8LSW1B54"
-  name    = "var.instances[count.index]-dev.cloudlife.site"
+  name    = "${var.instances}[count.index]-dev.cloudlife.site"
   type    = "A"
   ttl     = 300
   records = [aws_instance.frontend.private_ip]
