@@ -20,32 +20,25 @@ data "aws_security_group" "allow-all" {
   name = "allow-all"
 }
 
-output "indeses" {
-  value = length(var.instances)
+
+resource "aws_instance" "frontend" {
+  count = length(var.instances)
+  ami           = data.aws_ami.Centos8.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+
+  tags = {
+    Name = var.instances[count.index]
+  }
 }
 
-output "frontend" {
-  value = var.instances[1]
+resource "aws_route53_record" "Route53" {
+  zone_id = "Z0795361K3CL8LSW1B54"
+  name    = "var.instances[count.index]-dev.cloudlife.site"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.frontend.private_ip]
 }
-
-# resource "aws_instance" "frontend" {
-#   count = length(var.instances)
-#   ami           = data.aws_ami.Centos8.image_id
-#   instance_type = var.instance_type
-#   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
-
-#   tags = {
-#     Name = var.instances[count.index]
-#   }
-# }
-
-# resource "aws_route53_record" "frontend" {
-#   zone_id = "Z0795361K3CL8LSW1B54"
-#   name    = "frontend-dev.cloudlife.site"
-#   type    = "A"
-#   ttl     = 300
-#   records = [aws_instance.frontend.private_ip]
-# }
 
 # resource "aws_instance" "mongodb" {
 #   ami           = data.aws_ami.Centos8.image_id
