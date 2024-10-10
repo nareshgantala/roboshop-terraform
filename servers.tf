@@ -46,18 +46,18 @@ variable "instances" {
       name = "redis"
       instance_type = "t3.small"
     }
-    rabbitmq = {
-      name = "rabbitmq"
-      instance_type = "t3.small"
-    }
-    mysql = {
-      name = "mysql"
-      instance_type = "t3.small"
-    }
-    cart = {
-      name = "cart"
-      instance_type = "t3.small"
-    }
+    # rabbitmq = {
+    #   name = "rabbitmq"
+    #   instance_type = "t3.small"
+    # }
+    # mysql = {
+    #   name = "mysql"
+    #   instance_type = "t3.small"
+    # }
+    # cart = {
+    #   name = "cart"
+    #   instance_type = "t3.small"
+    # }
   }
 }
 
