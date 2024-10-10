@@ -78,13 +78,13 @@ resource "aws_instance" "frontend" {
   }
 }
 
-# resource "aws_route53_record" "frontend" {
-#   zone_id = "Z0795361K3CL8LSW1B54"
-#   name    = "frontend-dev.cloudlife.site"
-#   type    = "A"
-#   ttl     = 300
-#   records = [aws_instance.frontend.private_ip]
-# }
+resource "aws_route53_record" "frontend" {
+  zone_id = "Z0795361K3CL8LSW1B54"
+  name    = "${each.value["name"]}-dev.cloudlife.site"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.frontend[each.value["name"]].private_ip]
+}
 
 # resource "aws_instance" "mongodb" {
 #   ami           = data.aws_ami.Centos8.image_id
