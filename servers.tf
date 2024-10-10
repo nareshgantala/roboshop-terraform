@@ -28,7 +28,7 @@ variable "instances" {
     }    
     user = {
       name = "user"
-      instance_type = "t3.small"
+      instance_type = "t3.micro"
     }
     catalogue = {
       name = "catalogue"
@@ -70,11 +70,11 @@ resource "aws_instance" "frontend" {
   # count = length(var.instances)
   for_each = var.instances
   ami           = data.aws_ami.Centos8.image_id
-  instance_type = var.instances[each.value["instance_type"]]
+  instance_type = each.value["instance_type"]
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
 
   tags = {
-    Name = var.instances[each.value["name"]]
+    Name = each.value["name"]
   }
 }
 
