@@ -8,12 +8,57 @@ data "aws_ami" "Centos8" {
   }
 }
 
-variable "instance_type" {
-  default = "t3.small"
-}
+# variable "instance_type" {
+#   default = "t3.small"
+# }
 
 variable "instances" {
-  default = [ "frontend", "mongodb", "payment", "user", "shipping", "dispatch", "catalogue", "mysql", "rabbitmq", "cart", "redis" ]
+  default = {
+    frontend = {
+      name = "frontend"
+      instance_type = "t3.small"
+    }
+    mongodb = {
+      name = "mongodb"
+      instance_type = "t3.small"
+    }
+    payment = {
+      name = "payment"
+      instance_type = "t3.small"
+    }    
+    user = {
+      name = "user"
+      instance_type = "t3.small"
+    }
+    catalogue = {
+      name = "catalogue"
+      instance_type = "t3.small"
+    }
+    shipping = {
+      name = "shipping"
+      instance_type = "t3.small"
+    }
+    dispatch = {
+      name = "dispatch"
+      instance_type = "t3.small"
+    }
+    redis = {
+      name = "redis"
+      instance_type = "t3.small"
+    }
+    rabbitmq = {
+      name = "rabbitmq"
+      instance_type = "t3.small"
+    }
+    mysql = {
+      name = "mysql"
+      instance_type = "t3.small"
+    }
+    cart = {
+      name = "cart"
+      instance_type = "t3.small"
+    }
+  }
 }
 
 data "aws_security_group" "allow-all" {
@@ -22,13 +67,14 @@ data "aws_security_group" "allow-all" {
 
 
 resource "aws_instance" "frontend" {
-  count = length(var.instances)
+  # count = length(var.instances)
+  for_each = var.instances
   ami           = data.aws_ami.Centos8.image_id
-  instance_type = var.instance_type
+  instance_type = var.instances[each.value[instance_type]]
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
 
   tags = {
-    Name = var.instances[count.index]
+    Name = var.instances[each.value[name]]
   }
 }
 
