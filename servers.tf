@@ -9,7 +9,6 @@ resource "aws_instance" "frontend" {
   tags = {
     Name = each.value["name"]
   }
-}
 
 provisioner "remote-exec" {
   
@@ -26,6 +25,7 @@ provisioner "remote-exec" {
       "cd roboshop-shell",
       "sudo bash ${each.value["name"]}.sh"
   ]
+}
 }
 
 resource "aws_route53_record" "frontend" {
