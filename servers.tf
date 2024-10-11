@@ -13,7 +13,7 @@ resource "aws_instance" "frontend" {
 
 resource "aws_route53_record" "frontend" {
   for_each = var.components
-  zone_id = "Z00869473CSG2NBMF0Y2X"
+  zone_id = "Z0807971R0XGYSVV8ZBE"
   name    = "${each.value["name"]}-dev.cloudlife.site"
   type    = "A"
   ttl     = 300
