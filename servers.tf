@@ -35,7 +35,7 @@ resource "null_resource" "provisioner" {
 
 resource "aws_route53_record" "frontend" {
   for_each = var.components
-  zone_id = "Z0807971R0XGYSVV8ZBE"
+  zone_id = "Z05602471NCWAU8HMW8C"
   name    = "${each.value["name"]}-dev.cloudlife.site"
   type    = "A"
   ttl     = 300
