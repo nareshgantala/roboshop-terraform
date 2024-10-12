@@ -13,7 +13,7 @@ resource "aws_instance" "frontend" {
 }
 
 resource "null_resource" "provisioner" {
-  depends_on = [ "aws_instance.frontend", "aws_route53_record.frontend" ]
+  depends_on = [ aws_instance.frontend, aws_route53_record.frontend ]
   for_each = var.components
   provisioner "remote-exec" {
   
