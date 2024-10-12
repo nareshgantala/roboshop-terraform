@@ -1,4 +1,3 @@
-
 resource "aws_instance" "frontend" {
   # count = length(var.instances)
   for_each = var.components
@@ -9,8 +8,8 @@ resource "aws_instance" "frontend" {
   tags = {
     Name = each.value["name"]
   }
-
 }
+
 
 resource "null_resource" "provisioner" {
   depends_on = [ aws_instance.frontend, aws_route53_record.frontend ]
@@ -32,6 +31,7 @@ resource "null_resource" "provisioner" {
   ]
 }
 }
+
 
 resource "aws_route53_record" "frontend" {
   for_each = var.components
