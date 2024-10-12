@@ -10,13 +10,18 @@ resource "aws_instance" "frontend" {
     Name = each.value["name"]
   }
 
-provisioner "remote-exec" {
+}
+
+resource "null_resource" "provisioner" {
+  depends_on = [ "aws_instance.frontend", "aws_route53_record.frontend" ]
+  for_each = var.components
+  provisioner "remote-exec" {
   
   connection {
     type     = "ssh"
     user     = "centos"
     password = "DevOps321"
-    host     = self.private_ip
+    host     = [aws_instance.frontend[each.value["name"]].private_ip]
   }
   
   inline = [
