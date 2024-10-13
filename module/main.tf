@@ -32,8 +32,8 @@ resource "null_resource" "provisioner" {
 
 
 resource "aws_route53_record" "records" {
-  zone_id = "Z05602471NCWAU8HMW8C"
-  name    = "${var.var.componenet_name}-dev.cloudlife.site"
+  zone_id = "Z008611913JO2PP72O804"
+  name    = "${var.componenet_name}-dev.cloudlife.site"
   type    = "A"
   ttl     = 300
   records = [aws_instance.instance.private_ip]
