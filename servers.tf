@@ -8,3 +8,8 @@ module "servers" {
   password = lookup(each.value, "password", "null" )
   
 }
+
+
+variable "components" {
+  
+}
