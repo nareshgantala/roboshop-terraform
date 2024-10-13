@@ -10,5 +10,6 @@ module "servers" {
 
 
 variable "components" {}
+variable "env" {}
 
 
