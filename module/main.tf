@@ -32,7 +32,7 @@ resource "null_resource" "provisioner" {
 
 
 resource "aws_route53_record" "records" {
-  zone_id = "Z013123638HTWXYNEYEOG"
+  zone_id = "Z08473532Y02UUGEADBBG"
   name    = "${var.component_name}-dev.cloudlife.site"
   type    = "A"
   ttl     = 300
