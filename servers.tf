@@ -1,5 +1,15 @@
-module "servers" {
-  for_each = var.components  
+module "database-servers" {
+  for_each = var.database_servers  
+  source = "./module"
+  component_name = each.value["name"]
+  # env = var.env
+  instance_type = each.value["instance_type"]
+  password = lookup(each.value, "password", "null" )
+  
+}
+
+module "app-servers" {
+  for_each = var.app_servers  
   source = "./module"
   component_name = each.value["name"]
   # env = var.env
@@ -9,7 +19,11 @@ module "servers" {
 }
 
 
+
+
 variable "components" {}
 variable "env" {}
+
+
 
 
